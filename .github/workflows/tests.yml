@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
+      - name: Install python testing dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi pytest
+      
       - name: Setup config file
         run: cp ./test/tester-config.yml ./config.yml
       
@@ -32,16 +37,15 @@ jobs:
         working-directory: ./test
         run: docker compose -f tester-compose.yml up -d
 
-      # Runs a set of commands using the runners shell
-      - name: Test Echos
+      - name: Test API with pytest
         run: |
-          echo Hello, World!
-          echo Goodbye, Cruel World!
-          
-      - name: Manual docker compose up
+          pytest
+    
+      - name: Manual docker compose down
         working-directory: ./test
         run: docker compose -f tester-compose.yml down
-          
+        
+      # another way to do docker compose that will fail silently + cleanup
       #- name: Docker Compose Action
       #  uses: isbang/compose-action@v1.1.0
       #  with:
