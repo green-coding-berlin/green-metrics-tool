@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=cccvvv
     volumes:
       - green-coding-postgres-data:/var/lib/postgresql/data
-      - ./structure.sql:/docker-entrypoint-initdb.d/structure.sql:ro
+      - ../docker/structure.sql:/docker-entrypoint-initdb.d/structure.sql:ro
     ports:
       - 5432:5432
   green-coding-nginx:
@@ -20,9 +20,9 @@ services:
     restart: always
     volumes:
       - green-coding-shared-tmp:/tmp
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/api.conf:/etc/nginx/conf.d/api_nginx.conf:ro
-      - ./nginx/frontend.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../docker/nginx/api.conf:/etc/nginx/conf.d/api_nginx.conf:ro
+      - ../docker/nginx/frontend.conf:/etc/nginx/conf.d/default.conf:ro
   green-coding-gunicorn:
     build:
       context: .
