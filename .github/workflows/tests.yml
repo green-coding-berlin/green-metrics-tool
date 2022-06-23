@@ -27,7 +27,7 @@ jobs:
       
       - name: Manual docker compose up
         working-directory: ./test
-        run: docker compose up
+        run: docker compose -f tester-compose.yml up
 
       # Runs a set of commands using the runners shell
       - name: Test Echos
@@ -37,7 +37,7 @@ jobs:
           
       - name: Manual docker compose up
         working-directory: ./test
-        run: docker compose down
+        run: docker compose -f tester-compose.yml down
           
       #- name: Docker Compose Action
       #  uses: isbang/compose-action@v1.1.0
