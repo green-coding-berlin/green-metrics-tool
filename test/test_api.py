@@ -1,15 +1,14 @@
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+import requests
 import os
 import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f"{current_dir}/../api")
 
-from api import app
-client = TestClient(app)
+
+API_URL="api.green-coding.local:8000"
 
 
 def test_read_main():
-    response = client.get("/v1/projects")
+    response = requests.get(f"{API_URL}/v1/projects")
     assert response.status_code == 200
