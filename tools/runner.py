@@ -39,7 +39,7 @@ parser.add_argument("--debug", type=str, help="Activate steppable debug mode")
 
 args = parser.parse_args() # script will exit if url is not present
 
-user_email,project_id=None,None
+user_email,project_id=None,None 
 
 if(args.folder is not None and args.url is not None):
         print('Please supply only either --folder or --url\n')
