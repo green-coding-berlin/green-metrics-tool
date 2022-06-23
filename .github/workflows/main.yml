@@ -34,3 +34,9 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      - name: Docker Compose Action
+        uses: isbang/compose-action@v1.1.0
+        with:
+          compose-file: "./docker/docker-compose.yml"
+
