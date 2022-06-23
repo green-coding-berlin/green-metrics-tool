@@ -44,7 +44,11 @@ class Runner:
 
     def run(self, uri, uri_type, project_id):
 
-user_email,project_id=None,None
+<<<<<<< HEAD
+        config = GlobalConfig().config
+=======
+user_email,project_id=None,None 
+>>>>>>> 7efa5ca (touch runner.py to test git actions)
 
         debug = DebugHelper(self.debug_mode) # Instantiate debug helper with correct mode
 
