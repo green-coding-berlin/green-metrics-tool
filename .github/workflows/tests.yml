@@ -30,7 +30,7 @@ jobs:
       
       - name: Manual docker compose up
         working-directory: ./test
-        run: docker compose -f tester-compose.yml up
+        run: docker compose -f tester-compose.yml up -d
 
       # Runs a set of commands using the runners shell
       - name: Test Echos
