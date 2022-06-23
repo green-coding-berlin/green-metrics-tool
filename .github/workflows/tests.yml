@@ -24,19 +24,23 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      
+      - name: Manual docker compose up
+        working-directory: ./test
+        run: docker compose up
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Test Echos
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo Hello, World!
+          echo Goodbye, Cruel World!
           
-      - name: Docker Compose Action
-        uses: isbang/compose-action@v1.1.0
-        with:
-          compose-file: "./test/tester-compose.yml"
+      - name: Manual docker compose up
+        working-directory: ./test
+        run: docker compose down
+          
+      #- name: Docker Compose Action
+      #  uses: isbang/compose-action@v1.1.0
+      #  with:
+      #    compose-file: "./test/tester-compose.yml"
 
