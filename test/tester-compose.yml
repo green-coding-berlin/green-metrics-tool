@@ -26,7 +26,7 @@ services:
   green-coding-gunicorn:
     build:
       context: .
-      dockerfile: Dockerfile-gunicorn
+      dockerfile: ../docker/Dockerfile-gunicorn
     container_name: green-coding-gunicorn-container
     depends_on:
       - green-coding-postgres
