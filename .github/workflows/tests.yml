@@ -36,6 +36,10 @@ jobs:
       - name: Manual docker compose up
         working-directory: ./test
         run: docker compose -f tester-compose.yml up -d
+        
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
 
       - name: Test API with pytest
         run: |
