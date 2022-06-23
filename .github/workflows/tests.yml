@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "Compose Docker Containers"
-  conpose-docker-containers:
+  compose-docker-containers:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -38,5 +38,5 @@ jobs:
       - name: Docker Compose Action
         uses: isbang/compose-action@v1.1.0
         with:
-          compose-file: "./test/compose.yml.example"
+          compose-file: "./test/compose.yml"
 
