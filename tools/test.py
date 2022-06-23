@@ -45,6 +45,6 @@ if __name__ == "__main__":
     config = get_config()
     conn = get_db_connection(config)
 
-    p = "87851711-866f-433e-8117-2c54045a90ec"
+    p = "87851711-866f-433e-8117-2c54045a90ec-watev"
 
     insert_hw_info(conn, p)
