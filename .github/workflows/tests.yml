@@ -38,5 +38,5 @@ jobs:
       - name: Docker Compose Action
         uses: isbang/compose-action@v1.1.0
         with:
-          compose-file: "./docker/compose.yml.example"
+          compose-file: "./test/compose.yml.example"
 
