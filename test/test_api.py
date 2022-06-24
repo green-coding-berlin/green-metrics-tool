@@ -6,7 +6,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f"{current_dir}/../api")
 
 
-API_URL="http://api.green-coding.local:8000"
+API_URL="http://api.green-coding-nginx-container:8000"
 
 
 def test_read_main():
