@@ -41,9 +41,9 @@ jobs:
         run: sleep 10s
         shell: bash
 
-      - name: Test API with pytest
-        run: |
-          pytest
+      #- name: Test API with pytest
+      #  run: |
+      #    pytest
     
       - name: Manual docker compose down
         working-directory: ./test
