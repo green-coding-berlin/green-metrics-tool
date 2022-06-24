@@ -35,7 +35,7 @@ jobs:
 
       - name: setup /etc/hosts
         run: |
-          echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" >> /etc/hosts
+          sudo echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" >> /etc/hosts
           
           
       - name: Manual docker compose up
@@ -46,9 +46,9 @@ jobs:
         run: sleep 10s
         shell: bash
 
-      #- name: Test API with pytest
-      #  run: |
-      #    pytest
+      - name: Test API with pytest
+        run: |
+          pytest
     
       - name: Manual docker compose down
         working-directory: ./test
