@@ -37,8 +37,8 @@ jobs:
         working-directory: ./test
         run: docker compose -f tester-compose.yml up -d
         
-      - name: Sleep for 30 seconds
-        run: sleep 30s
+      - name: Sleep for 10 seconds
+        run: sleep 10s
         shell: bash
 
       - name: Test API with pytest
@@ -47,11 +47,10 @@ jobs:
     
       - name: Manual docker compose down
         working-directory: ./test
-        run: docker compose -f tester-compose.yml down
+        run: docker compose -f tester-compose.yml down -v
         
       # another way to do docker compose that will fail silently + cleanup
       #- name: Docker Compose Action
       #  uses: isbang/compose-action@v1.1.0
       #  with:
       #    compose-file: "./test/tester-compose.yml"
-
