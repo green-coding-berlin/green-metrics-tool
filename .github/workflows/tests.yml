@@ -32,7 +32,12 @@ jobs:
       
       - name: Setup config file
         run: cp ./test/tester-config.yml ./config.yml
-      
+
+      - name: setup /etc/hosts
+        run: |
+          echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" >> /etc/hosts
+          
+          
       - name: Manual docker compose up
         working-directory: ./test
         run: docker compose -f tester-compose.yml up -d
