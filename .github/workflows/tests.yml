@@ -37,13 +37,13 @@ jobs:
         working-directory: ./test
         run: docker compose -f tester-compose.yml up -d
         
-      - name: Sleep for 30 seconds
-        run: sleep 30s
-        shell: bash
+      #- name: Sleep for 30 seconds
+      #  run: sleep 30s
+      #  shell: bash
 
-      - name: Test API with pytest
-        run: |
-          pytest
+      #- name: Test API with pytest
+      #  run: |
+      #    pytest
     
       - name: Manual docker compose down
         working-directory: ./test
