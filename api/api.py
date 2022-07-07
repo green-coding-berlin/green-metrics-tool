@@ -2,6 +2,8 @@ import yaml
 import os
 import sys
 import psycopg2.extras
+from psycopg2 import OperationalError, errorcodes, errors
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../lib')
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../tools')
 
@@ -9,7 +11,7 @@ from setup_functions import get_config
 from send_email import send_email
 from db import DB
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
 from pydantic import BaseModel
@@ -118,8 +120,70 @@ async def get_stats_single(project_id: str):
     
     if(data is None or data == []):
         return {'success': False, 'err': 'Data is empty'}
-
     return {"success": True, "data": data, "project": get_project(project_id)}
+
+@app.get('/v1/stats/multi')
+async def get_stats_multi(p: list[str] | None = Query(default=None)):
+    for p_id in p:
+        if(p_id is None or p_id.strip() == ''):
+            return {'success': False, 'err': 'Project_id is empty'}
+
+    query = """
+            SELECT
+                projects.id, projects.name, stats.container_name, stats.time, stats.metric, stats.value, notes.note
+            FROM
+                stats
+            LEFT JOIN
+                notes
+            ON
+                notes.project_id = stats.project_id
+            AND
+                notes.time = stats.time
+            AND
+                notes.container_name = stats.container_name
+            LEFT JOIN
+                projects
+            ON
+                stats.project_id = projects.id
+            WHERE
+                STATS.project_id = ANY(%s::uuid[])
+            ORDER BY
+                stats.time, projects.id ASC
+            """
+    params = (p,)
+    data = DB().fetch_all(query, params=params)
+    if(data is None or data == []):
+        return {'success': False, 'err': 'Data is empty'}
+    return {"success": True, "data": data}
+
+@app.get('/v1/stats/compare')
+async def get_stats_compare(p: list[str] | None = Query(default=None)):
+    for p_id in p:
+        if(p_id is None or p_id.strip() == ''):
+            return {'success': False, 'err': 'Project_id is empty'}
+
+    query = """
+            SELECT 
+                projects.name, stats.container_name, stats.metric, AVG(stats.value)
+            FROM 
+                stats 
+            LEFT JOIN 
+                projects
+            ON 
+                stats.project_id = projects.id
+            WHERE 
+                stats.metric = ANY(ARRAY['cpu','mem','system-energy'])
+            AND 
+                STATS.project_id = ANY(%s::uuid[])
+            GROUP BY projects.name, stats.container_name, stats.metric
+            """
+    params = (p,)
+    data = DB().fetch_all(query, params=params)
+
+    if(data is None or data == []):
+        return {'success': False, 'err': 'Data is empty'}
+    return {"success": True, "data": data}
+
 
 class Project(BaseModel):
     name: str
