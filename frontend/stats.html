@@ -28,7 +28,11 @@
     <!-- <script src="./assets/js/state.js"></script> -->
     <!-- <script src="./assets/js/underscore.min.js"></script> -->
 
-    <link rel="stylesheet" type="text/css" class="ui" href="./dist/semantic.min.css">
+    <!-- <script type="module">
+        import sheet from './dist/semantic.min.css' assert { type: 'css' };
+        document.adoptedStyleSheets = [sheet];
+    </script> -->
+    <link rel="stylesheet" type="text/css" href="./dist/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/docs.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/green-coding.css">
 
@@ -131,47 +135,8 @@
                             </div>
                         </div>
 
-                        <div class="ui four cards stackable">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="header">AVG CPU Load (Estimate)</div>
-                                    <div class="description">
-                                        <h5 id="avg-cpu-load">%</h5>
-                                        <p>Over all containers. (See disclaimer)</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="card">
-                                <div class="content">
-                                    <div class="header">MAX CPU Load</div>
-                                    <div class="description">
-                                        <h5 id="max-cpu-load">&nbsp;</h5>
-                                        <p>Over all containers</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="content">
-                                    <div class="header">Total Energy</div>
-                                    <div class="description">
-                                        <h5 id="total-energy">&nbsp;</h5>
-                                        <p>For whole CPU Package. NOT per container.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="content">
-                                    <div class="header">Total CO2</div>
-                                    <div class="description">
-                                        <h5 id="total-co2">&nbsp;</h5>
-                                        <p>For whole CPU Package. NOT per container.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <avg-containers></avg-containers>
                         <div class="ui five cards stackable">
                           <div class="card">
                               <div class="content">
@@ -182,6 +147,12 @@
                                   </div>
                               </div>
                           </div>
+                        <avg-containers></avg-containers>
+
+                        <avg-containers></avg-containers>
+                        <avg-containers></avg-containers>
+                        <avg-containers></avg-containers>
+                        <avg-containers></avg-containers>
 
                           <div class="card">
                               <div class="content">
@@ -358,11 +329,6 @@
                             // chart_cpu.setAnnotations(annotations); // please rework
                         }
 
-                        document.querySelector("#max-cpu-load").innerText = (Math.max.apply(null, cpu_load) / 100) + " %"
-                        document.querySelector("#total-energy").innerText = (total_energy / 1000).toFixed(2) + " J"
-                        document.querySelector("#total-co2").innerText = (total_energy / 1000 / 3600000 * 0.519 * 1000000).toFixed(2) + " ugCO2eq"
-                        document.querySelector("#avg-cpu-load").innerText = ((cpu_load.reduce((a,b) => a + b, 0) / cpu_load.length) / 100).toFixed(2) + " %"
-
                         const total_CO2 = (total_energy / 1000 / 3600000 * 0.519 * 1000000);
                         // const total_CO2_in_kg = total_CO2 / 1000000000; // the real value, bring it back later on
                         const total_CO2_in_kg = total_CO2 * 10; // fake value only so that we see numbers greater than 0.00
@@ -408,6 +374,8 @@
   width: 80%; /* Could be more or less, depending on screen size */
 }
 </style>
+
+<script type="module" src="/assets/js/avg-containers.js"></script>
 
 </body>
 </html>
