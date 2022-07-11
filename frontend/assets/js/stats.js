@@ -312,10 +312,3 @@ $(document).ready(() => {
 
 });
 
-// auto close menu for small devices on load
-$(document).ready(() => {
-        if(window.matchMedia('(max-width: 991px)').matches) {
-          closeMenu()
-        }
-
-})
