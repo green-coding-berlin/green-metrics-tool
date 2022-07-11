@@ -74,9 +74,46 @@ const getDataAndLabels = (series) => {
   return { data, labels };
 }
 
-const createGraph = (element, data, labels, title,) => {
-  return new Dygraph(element.querySelector("#"+title+"_chart"), data,);
+const createGraph = (element, data, labels, title) => {
+  return new Dygraph(element.querySelector("#"+title+"_chart"),
+                        data,
+                        {
+                          labels,
+                          fillGraph: true,
+                          showRoller: true,
+                          rollPeriod: 10,
+                          title,
+                                legend: 'always' ,
+                                labelsSeparateLines: true,
+                          highlightSeriesOpts: { strokeWidth: 2 },
+                          // showLabelsOnHighlight: false,
+                          axes: {
+                            x: {
+                              axisLabelFormatter: Dygraph.dateAxisLabelFormatter,
+                              ticker: Dygraph.dateTicker,
+                            }
+                          },
+                          drawCallback: function(g) {
+                            // const notes = document.getElementsByClassName('dygraph-annotation');
+                            // for (let i = 0; i < notes.length; i++) {
+                            //   if (notes[i].style.top === "") notes[i].style.display = "none";
+                            // }
+                          },
+                          annotationMouseOverHandler: function(ann, point, dg, event) {
+                            let modal = document.getElementById("myModal");
+                            modal.style.display = "block";
+                            modal.innerHTML = ` <!-- Modal content -->
+                                                <div class="modal-content">
+                                                  <p>${ann.text}</p>
+                                                </div>`
+                          },
+                          annotationMouseOutHandler: function(ann, point, dg, event) {
+                            let modal = document.getElementById("myModal");
+                            modal.style.display = "none";
+                          },
+                        });
 }
+
 
 $(document).ready(() => {
         var cpu_load = [];
