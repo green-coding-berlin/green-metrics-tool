@@ -1,3 +1,34 @@
 body {
     background: #e9eaef;
 }
+
+@media only screen and (max-width: 820px) {
+    #menu-arne {
+        display: none;
+     }
+}
+.gc-1-box {
+    margin: 10px !important;
+    width: inherit;
+}
+.gc-2-box {
+    width: 400px;
+    flex-grow: 1;
+    margin: 10px !important;
+}
+
+.gc-4-box {
+    width: 200px;
+    flex-grow: 1;
+    margin: 10px !important;
+}
+
+.gc-5-box {
+    width: 150px;
+    flex-grow: 1;
+    margin: 10px !important;
+}
+
+.dygraph-title {
+    text-align: center;
+}
