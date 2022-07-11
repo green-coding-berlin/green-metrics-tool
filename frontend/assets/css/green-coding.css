@@ -35,3 +35,18 @@ body {
 .dygraph-title {
     text-align: center;
 }
+
+
+
+/* MENU STYLES ========== */
+a,
+#menu-arne, #content-flex {
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+#menu-toggle i {
+     font-size: 2em;
+     color: #333;
+     margin:  10px;
+ }

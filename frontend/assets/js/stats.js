@@ -2,7 +2,7 @@ function createChartContainer(container, el) {
 
     const chart_node = document.createElement('div')
 
-    chart_node.innerHTML = `<div id="${el}_chart"></div>`
+    chart_node.innerHTML = `<div id="${el}_chart" style="width: 100%;"></div>`
 //    chart_node.style.position = "relative"
 
     chart_node.classList.add("ui")
@@ -75,40 +75,11 @@ const getDataAndLabels = (series) => {
 }
 
 const createGraph = (element, data, labels, title,) => {
-  return new Dygraph(element.querySelector("#"+title+"_chart"),
-                        data,
-
-                        );
+  return new Dygraph(element.querySelector("#"+title+"_chart"), data,);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var cpu_load = [];
+$(document).ready(() => {
+        var cpu_load = [];
         var my_series = {}
         var project_data = {}
 
@@ -231,16 +202,30 @@ var cpu_load = [];
 
 
                         $(document).ready(() => {
+
+                            /* APEX
                             charts = []
 
                             for ( el in my_series) {
-                                const { "data": data, "labels": labels } = getDataAndLabels(Object.values(my_series[el]));
                                 const element = createChartContainer("#chart-container", el)
                                 options.series = Object.values(my_series[el])
                                 charts.push(new ApexCharts(element, options))
-                                // chart_cpu.setAnnotations(annotations); // please rework
                             }
                             charts.forEach((chart) => chart.render())
+                            */
+
+                            /** Dygraphs **/
+                            elements = {}
+
+                            for (el in my_series) {
+                                elements[el] = createChartContainer("#chart-container", el)
+                            }
+                            for (el in my_series) {
+                                const { "data": data, "labels": labels } = getDataAndLabels(Object.values(my_series[el]));
+                                createGraph(elements[el], data, labels, el)
+                            }
+                            /** Dygraphs END **/
+
 
                         })
 
@@ -266,3 +251,19 @@ var cpu_load = [];
                   alert("Fetch failed: "+e)
               }
             }
+});
+
+$(document).on('click','#menu-toggle.closed',function(e){
+    $(this).removeClass('closed').addClass('opened');
+    $(this).find('i').removeClass('right').addClass('left');
+    $('#menu-arne').css({ 'left':'0px' });
+    $('#content-flex').css({ 'margin-left':'300px' });
+
+});
+
+$(document).on('click','#menu-toggle.opened',function(e){
+    $(this).removeClass('opened').addClass('closed');
+    $(this).find('i').removeClass('left').addClass('right');
+    $('#menu-arne').css({ 'left':'-300px' });
+    $('#content-flex').css({ 'margin-left':'0px' });
+});
