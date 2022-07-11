@@ -6,6 +6,9 @@ body {
     #menu-arne {
         display: none;
      }
+     #content-flex {
+         margin-left:  0 !important;
+     }
 }
 .gc-1-box {
     margin: 10px !important;
