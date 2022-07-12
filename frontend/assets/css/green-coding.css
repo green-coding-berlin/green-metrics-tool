@@ -26,6 +26,13 @@ body {
     margin: 10px !important;
 }
 
+.gc-chart {
+    width: 600px;
+    height: 600px;
+    flex-grow: 1;
+    margin: 10px !important;
+}
+
 
 /* MENU STYLES ========== */
 a,

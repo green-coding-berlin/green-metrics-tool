@@ -2,13 +2,13 @@ function createChartContainer(container, el) {
 
     const chart_node = document.createElement('div')
 
-    chart_node.innerHTML = `<div id="${el}_chart" style="width: 100%;"></div>`
+    chart_node.innerHTML = `<div id="${el}_chart" style="width: 100%; height: 100%;"></div>`
 //    chart_node.style.position = "relative"
 
     chart_node.classList.add("ui")
     chart_node.classList.add("segment")
     chart_node.classList.add("raised")
-    chart_node.classList.add("gc-2-box")
+    chart_node.classList.add("gc-chart")
 
     document.querySelector(container).appendChild(chart_node);
     return chart_node;
