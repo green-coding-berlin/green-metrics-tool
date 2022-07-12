@@ -2,22 +2,8 @@ body {
     background: #e9eaef;
 }
 
-#menu-arne {
-    left: 0px;
- }
- #content-flex {
-     margin-left: 300px;
- }
 
-
-@media only screen and (max-width: 820px) {
-    #menu-arne {
-        left: -300px;
-     }
-     #content-flex {
-         margin-left: 0;
-     }
-}
+/* New flexbox layouting, cause Fomantic UI Grid is no good */
 .gc-1-box {
     margin: 10px !important;
     width: inherit;
@@ -53,3 +39,20 @@ a,
      color: #333;
      margin:  10px;
  }
+
+ #menu-arne {
+    left: 0px;
+ }
+ #content-flex {
+     margin-left: 300px;
+ }
+
+@media only screen and (max-width: 820px) {
+    #menu-arne {
+        left: -300px;
+     }
+     #content-flex {
+         margin-left: 0;
+     }
+}
+
