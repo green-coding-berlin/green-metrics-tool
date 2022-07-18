@@ -35,8 +35,8 @@ jobs:
 
       - name: setup /etc/hosts
         run: |
-          sudo echo "\n127.0.0.1 green-coding-postgres-container\n" | sudo tee -a /etc/hosts
-          sudo echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 green-coding-postgres-container" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 api.green-coding.local metrics.green-coding.local" | sudo tee -a /etc/hosts
           sudo cat /etc/hosts          
           
       - name: Manual docker compose up
