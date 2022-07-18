@@ -30,15 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install fastapi pytest
       
-      - name: Run install script
-        run: |
-          sudo ./install.sh
-      #- name: Setup config file
-      #  run: cp ./test/tester-config.yml ./config.yml
+      - name: Setup config file
+        run: cp ./test/tester-config.yml ./config.yml
 
-      #- name: setup /etc/hosts
-      #  run: |
-      #    sudo echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" | sudo tee -a /etc/hosts
+      - name: setup /etc/hosts
+        run: |
+          sudo echo "\n127.0.0.1 green-coding-postgres-container\n" | sudo tee -a /etc/hosts
+          sudo echo "\n127.0.0.1 api.green-coding.local metrics.green-coding.local\n" | sudo tee -a /etc/hosts
           
           
       - name: Manual docker compose up
