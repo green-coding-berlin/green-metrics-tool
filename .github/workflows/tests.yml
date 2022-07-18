@@ -48,6 +48,7 @@ jobs:
         shell: bash
 
       - name: Test API with pytest
+        working-directory: ./test
         run: |
           pytest
     
