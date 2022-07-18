@@ -1,4 +1,3 @@
-ALTER USER postgres WITH PASSWORD 'cccvvv';
 CREATE DATABASE "green-coding";
 \c green-coding;
 
@@ -9,6 +8,7 @@ CREATE TABLE projects (
     name text,
     url text,
     email text,
+    usage_scenario jsonb,
     cpu text,
     memtotal text,
     crawled boolean DEFAULT false,

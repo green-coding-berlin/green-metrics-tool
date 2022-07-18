@@ -4,12 +4,17 @@ services:
     container_name: green-coding-postgres-container
     restart: always
     environment:
-      - POSTGRES_PASSWORD=cccvvv
+      - POSTGRES_PASSWORD=PLEASE_CHANGE_THIS
     volumes:
       - green-coding-postgres-data:/var/lib/postgresql/data
       - ./structure.sql:/docker-entrypoint-initdb.d/structure.sql:ro
     ports:
       - 5432:5432
+    command: >
+      -c ssl=on
+      -c ssl_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+      -c ssl_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+#     -c work_mem=16MB # This option can potentially speed up big queries: https://www.twilio.com/blog/sqlite-postgresql-complicated
   green-coding-nginx:
     image: nginx
     container_name: green-coding-nginx-container
@@ -35,6 +40,11 @@ services:
     volumes:
       - green-coding-shared-tmp:/tmp
       - PATH_TO_GREEN_METRICS_TOOL_REPO:/var/www/green-metrics-tool:ro
+
+# Although it would help us very much performance-wise the
+# Shared volume with only temporary data, green-coding-shared-tmp, must be
+# of type overlayfs and cannot be tmpfs (https://docs.docker.com/storage/tmpfs/)
+# tmpfs being a RAM stored and faster volume is sadly not shareable between containers
 volumes:
   green-coding-postgres-data:
   green-coding-shared-tmp:

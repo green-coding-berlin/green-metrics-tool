@@ -1,10 +1,15 @@
-from setup_functions import get_config
+import sys
 import traceback
+from setup_functions import get_config
 from send_email import send_error_email
 
 def end_error(*errors):
     log_error(*errors)
     exit(2)
+
+def email_and_log_error(*errors, email_admin=True, user_email=None, project_id=None):
+    log_error(errors)
+    email_error(errors, email_admin=True, user_email=user_email, project_id=project_id)
 
 def email_error(*errors, email_admin=True, user_email=None, project_id=None):
     config = get_config()
@@ -18,20 +23,21 @@ def email_error(*errors, email_admin=True, user_email=None, project_id=None):
     if user_email is not None:
         send_error_email(config, user_email, err, project_id)
 
-def log_error(*errors):
-    err = "Error: "
-    print("Error: ", *errors)
+def log_error(*errors, email=True):
+    print("\n\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n", file=sys.stderr)
+    
+    print("Error: ", *errors, "\n", file=sys.stderr)
+    print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n", file=sys.stderr)
+    
     traceback.print_exc()
+    print("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n", file=sys.stderr)
     # TODO: log to file
 
 if __name__ == "__main__":
     import argparse
-    import yaml
     import os
-    import sys
 
     sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../tools')
-    from setup_functions import get_config, get_db_connection
     from send_email import send_error_email
 
     
