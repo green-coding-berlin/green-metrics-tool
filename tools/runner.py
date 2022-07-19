@@ -44,7 +44,7 @@ class Runner:
 
     def run(self, uri, uri_type, project_id):
 
-user_email,project_id=None,None
+        config = GlobalConfig().config
 
         debug = DebugHelper(self.debug_mode) # Instantiate debug helper with correct mode
 
