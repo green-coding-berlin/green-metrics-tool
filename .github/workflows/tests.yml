@@ -51,7 +51,7 @@ jobs:
       - name: Run Tests
         working-directory: ./test
         run: |
-          pytest
+          sudo pytest
           
       - name: Stop Containers
         working-directory: ./test
