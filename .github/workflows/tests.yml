@@ -6,9 +6,9 @@ name: Run Tests
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "integration-tests-initial" ]
+    branches: [ "integration-tests-initial-pipeline-testing" ]
   pull_request:
-    branches: [ "integration-tests-initial" ]
+    branches: [ "integration-tests-initial-pipeline-testing" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,8 +34,25 @@ jobs:
         working-directory: ./test
         run: |
           ./setup-test-env.sh
-
+          
+      - name: Start Test container
+        working-directory: ./test
+        run: |
+          ./start-test-containers.sh
+          sleep 5
+          
       - name: Run Tests
         working-directory: ./test
         run: |
-          ./run-tests.sh
+          pytest
+          
+      - name: Run Tests
+        working-directory: ./test
+        run: |
+          ./stop-test-containers.sh
+        
+          
+      #- name: Run Tests
+      #  working-directory: ./test
+      #  run: |
+      #    ./run-tests.sh
