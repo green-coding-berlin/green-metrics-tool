@@ -18,9 +18,9 @@ def test_runner_reports(capsys):
     config = GlobalConfig(config_name="test-config.yml").config
 
     ## Download example application, insert fake project to be run
-    subprocess.run(["rm", "-Rf", "/tmp/example-applications/"])
-    subprocess.run(["mkdir", "/tmp/example-applications/"])
-    subprocess.run(["git", "clone", example_repo, "/tmp/example-applications/"], check=True, capture_output=True, encoding='UTF-8')
+    subprocess.run(["sudo", "rm", "-Rf", "/tmp/example-applications/"])
+    subprocess.run(["sudo", "mkdir", "/tmp/example-applications/"])
+    subprocess.run(["sudo", "git", "clone", example_repo, "/tmp/example-applications/"], check=True, capture_output=True, encoding='UTF-8')
     uri = '/tmp/example-applications/stress/'
     project_id = DB().fetch_one('INSERT INTO "projects" ("name","uri","email","last_run","created_at") \
                 VALUES \
