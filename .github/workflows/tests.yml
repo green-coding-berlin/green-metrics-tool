@@ -28,7 +28,7 @@ jobs:
       - name: Install python testing dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi pytest psycopg2 numpy
+          pip install fastapi pytest psycopg2 numpy pandas
       
       - name: Run Install Script
         run: |
@@ -43,6 +43,10 @@ jobs:
         working-directory: ./test
         run: |
           docker compose -f ../docker/test-compose.yml up -d
+      
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+        shell: bash
           
       - name: Run Tests
         working-directory: ./test
