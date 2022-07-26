@@ -46,7 +46,7 @@ jobs:
         run: |
           pytest
           
-      - name: Run Tests
+      - name: Stop Containers
         working-directory: ./test
         run: |
           ./stop-test-containers.sh
