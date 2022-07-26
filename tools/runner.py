@@ -115,7 +115,7 @@ class Runner:
                 # This MAY break in the future, as some docker CLI implementation do not allow this and require
                 # the command args to be passed on run only
 
-                docker_run_string = ['sudo', 'docker', 'run', '-it', '-d', '--name', container_name]
+                docker_run_string = ['docker', 'run', '-it', '-d', '--name', container_name]
 
                 docker_run_string.append('-v')
                 if 'folder-destination' in el:
