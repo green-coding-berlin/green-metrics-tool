@@ -38,8 +38,7 @@ jobs:
       - name: Start Test container
         working-directory: ./test
         run: |
-          ./start-test-containers.sh
-          sleep 5
+          docker compose -f ../docker/test-compose.yml up -d
           
       - name: Run Tests
         working-directory: ./test
