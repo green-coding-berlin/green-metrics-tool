@@ -32,12 +32,12 @@ jobs:
       
       - name: Run Install Script
         run: |
-          ./install.sh
+          ./install.sh -p testpw
 
       - name: Setup Test environment
         working-directory: ./test
         run: |
-          ./setup-test-env.sh
+          ./setup-test-env.sh -p testpw
           
       - name: Start Test container
         working-directory: ./test
