@@ -47,6 +47,9 @@ jobs:
       - name: Sleep for 10 seconds
         run: sleep 10s
         shell: bash
+        
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
           
       - name: Run Tests
         working-directory: ./test
