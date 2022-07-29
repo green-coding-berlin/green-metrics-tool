@@ -60,9 +60,3 @@ jobs:
         working-directory: ./test
         run: |
           ./stop-test-containers.sh
-        
-          
-      #- name: Run Tests
-      #  working-directory: ./test
-      #  run: |
-      #    ./run-tests.sh
