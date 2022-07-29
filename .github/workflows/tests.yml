@@ -50,6 +50,7 @@ jobs:
         
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
+        limit-access-to-users: dan-mm,ArneTR
           
       - name: Run Tests
         working-directory: ./test
