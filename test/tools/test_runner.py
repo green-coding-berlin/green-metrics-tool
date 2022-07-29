@@ -18,9 +18,9 @@ def test_runner_reports(capsys):
     config = GlobalConfig(config_name="test-config.yml").config
 
     ## Download example application, insert fake project to be run
-    subprocess.run(["sudo", "rm", "-Rf", "/tmp/example-applications/"])
-    subprocess.run(["sudo", "mkdir", "/tmp/example-applications/"])
-    subprocess.run(["sudo", "git", "clone", example_repo, "/tmp/example-applications/"], check=True, capture_output=True, encoding='UTF-8')
+    subprocess.run(["rm", "-Rf", "/tmp/example-applications/"])
+    subprocess.run(["mkdir", "/tmp/example-applications/"])
+    subprocess.run(["git", "clone", example_repo, "/tmp/example-applications/"], check=True, capture_output=True, encoding='UTF-8')
 
     uri = '/tmp/example-applications/stress/'
     subprocess.run(["docker", "compose", "-f", uri+"compose.yml", "build"])
