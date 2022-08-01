@@ -39,16 +39,16 @@ jobs:
       - name: Sleep for 10 seconds
         run: sleep 10s
         shell: bash
-
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        #with:
-        #  limit-access-to-users: dan-mm,ArneTR
           
       - name: Run Tests
         working-directory: ./test
         run: |
           pytest
+          
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        #with:
+        #  limit-access-to-users: dan-mm,ArneTR
           
       - name: Stop Containers
         working-directory: ./test
